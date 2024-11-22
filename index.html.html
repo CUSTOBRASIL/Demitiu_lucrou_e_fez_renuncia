@@ -1,285 +1,233 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pesquisa de Renuncia Fiscal 2024 por Razão Social</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      margin: 0;
-      background-color: #f4f4f4;
-    }
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
-    h1 {
-      font-size: 24px;
-      text-align: center;
-      color: #333;
-    }
-
-    #loading {
-      display: none;
-      font-size: 16px;
-      color: #333;
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    input {
-      padding: 10px;
-      margin: 10px 0;
-      width: 100%;
-      max-width: 400px;
-      display: block;
-      margin: 0 auto;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background-color: #fff;
-    }
-
-    th, td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f9c74f;
-      text-align: center;
-    }
-
-    #loading {
-      display: none;
-      font-size: 16px;
-      color: #333;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .text-section {
-      background-color: #e0e0e0;
-      padding: 15px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .renuncia-fiscal {
-      color: red;
-      font-weight: bold;
-      text-align: center;
-      background-color: #ffe6e6;
-      border-radius: 5px;
-    }
-
-    @media (max-width: 600px) {
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renúncia Fiscal 2024</title>
+    <style>
       body {
-        padding: 15px;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
       }
+  
+      .header {
+        background-color: #f0f8ff;
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+  
+      .header h1 {
+        font-size: 18px;
+        color: #003366;
+        margin: 5px 0;
+      }
+  
+      .header p {
+        font-size: 13px;
+        margin: 5px 0;
+        line-height: 1.4;
+      }
+  
+      .container {
+        margin-top: 80px;
+        padding: 10px 20px;
+      }
+  
+      .alert-box {
+        background-color: #ffe6e6;
+        padding: 20px;
+        border: 2px solid #ff4d4d;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+      }
+  
+      .alert-box p {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+  
+      .alert-box strong {
+        color: #ff0000;
+      }
+  
+      .alert-box span {
+        font-weight: bold;
+      }
+  
+      .loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        text-align: center;
+        background-color: #f9f9f9;
+        border: 2px solid #0073e6;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 95%;
+      }
+  
+      .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #0073e6;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+      }
+  
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+  
+      .loading p {
+        margin-top: 15px;
+        color: #0073e6;
+        font-weight: bold;
+      }
+  
+      input[type="text"] {
+  display: flex;
+  width: 100%; /* Ocupa todo o espaço disponível */
+  font-size: 20px; /* Aumenta o tamanho do texto */
+  
+  border: 2px solid #0073e6; /* Borda azul */
+  border-radius: 12px; /* Bordas arredondadas */
+  margin: 15px 0; /* Margem entre os elementos */
+  box-shadow: 0 4px 10px rgba(0, 115, 230, 0.4); /* Realça a entrada com uma sombra azul */
+  background: linear-gradient(90deg, #e6f7ff, #cceeff); /* Fundo gradiente azul claro */
+  transition: all 0.3s ease-in-out; /* Animações suaves */
+}
 
+/* Estilo ao passar o mouse */
+input[type="text"]:hover {
+  box-shadow: 0 6px 12px rgba(0, 115, 230, 0.6); /* Aumenta a sombra */
+  background: linear-gradient(90deg, #cceeff, #e6f7ff); /* Inverte o gradiente */
+  border-color: #005bb5; /* Escurece a borda */
+}
+
+/* Estilo ao focar no campo */
+input[type="text"]:focus {
+  box-shadow: 0 6px 14px rgba(0, 115, 230, 0.8); /* Destaque mais forte */
+  outline: none; /* Remove o contorno padrão */
+  border-color: #003d80; /* Borda azul mais escura */
+  background: linear-gradient(90deg, #b3e0ff, #99ccff); /* Fundo mais vibrante */
+}
+  
       table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+  
+      th, td {
+        text-align: left;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+  
+      th {
+        background-color: #0073e6;
+        color: #fff;
         font-size: 14px;
       }
-    }
-  </style>
-</head>
-<body>
+  
+      td {
+        font-size: 14px;
+      }
+  
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 16px;
+        }
+  
+        .header p {
+          font-size: 12px;
+        }
+  
+        .alert-box p {
+          font-size: 14px;
+        }
+  
+        input[type="text"] {
+          font-size: 16px;
+        }
+  
+        th, td {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+  
+    <!-- Cabeçalho Fixo -->
+    <div class="header">
+      <h1>Renúncia Fiscal 2024 - Pesquise por Razão Social</h1>
+      <p>Encontre empresas envolvidas em <strong>renúncias fiscais</strong>. Digite a razão social no campo de pesquisa para visualizar os dados.</p>
+    </div>
+  
+    <!-- Conteúdo Principal -->
+    <div class="container">
+  
+      <!-- Alerta -->
+      <div class="alert-box">
+        <p>
+          <strong>Atenção, trabalhador:</strong> Apesar de discursos que dizem proteger seus direitos, muitas políticas econômicas, sejam elas 
+          <span style="color: #ff7f50;">neoliberais</span> ou <span style="color: #1e90ff;">de extrema direita</span> de tirar direita, 
+          de Bolsonaro e Haddad podem impactar negativamente ao favorecer cortes e renúncias fiscais que beneficiam empresas, enquanto deixam os trabalhadores desprotegidos dos seus direitos.
+        </p>
+      </div>
+  
+      <!-- Indicador de Carregamento -->
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>⏳Carregando dados⏳...</p>
+      </div>
+  
+      <!-- Campo de Pesquisa -->
+      <input type="text" id="search-query" placeholder="Digite Razão Social" onkeyup="searchRazaoSocial()">
+  
+      <!-- Tabela de Resultados -->
+      <table id="results-table">
+        <thead>
+          <tr>
+            <th>Razão Social 🏛</th>
+            <th>Renúncias Fiscais (R$) 💵</th>
+            <th>Quantas Cestas Básicas (Setembro 2024 São Paulo Capital R$ 792,47) 🛒</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dados inseridos aqui dinamicamente -->
+        </tbody>
+      </table>
+  
+    </div>
+  
 
-  <div class="text-section" style="
-  background-color: #f0f8ff; 
-  padding: 10px; 
-  border-radius: 8px; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  z-index: 1000; 
-  text-align: center; 
-  font-family: Arial, sans-serif; 
-  overflow-y: auto;
-">
-  <h1 style="
-    font-size: 18px; 
-    color: #003366; 
-    margin-bottom: 10px;">
-    Renúncia Fiscal 2024 - Pesquise por Razão Social
-  </h1>
-  <p style="
-    font-size: 13px; 
-    color: #333; 
-    margin-bottom: 5px; 
-    line-height: 1.4;">
-    Encontre empresas envolvidas em <strong>renúncias fiscais</strong>. 
-    Digite a razão social no campo de pesquisa para visualizar os dados.
-  </p>
-</div>
-
-<!-- Espaço reservado para evitar que o conteúdo abaixo seja sobreposto -->
-<div style="margin-top: 80px;"></div>
-
-
-
-
-
-<div class="text-section" style="
-  background-color: #ffe6e6; 
-  padding: 20px; 
-  border: 2px solid #ff4d4d; 
-  border-radius: 10px; 
-  color: #333; 
-  font-size: 18px; 
-  line-height: 1.6; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-">
-  <p>
-    <strong style="color: #ff0000;">Atenção, trabalhador:</strong> 
-    Apesar de discursos que dizem proteger seus direitos, muitas políticas econômicas, 
-    sejam elas <span style="color: #ff7f50;">neoliberais</span> ou <span style="color: #1e90ff;">de extrema direita</span>, 
-    de Bolsonaro e Haddad podem impactar negativamente ao favorecer cortes e renúncias fiscais que beneficiam empresas, 
-    enquanto deixam os trabalhadores desprotegidos do seus direitos.
-  </p>
-</div>
-<div id="loading" style="
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: center; 
-  padding: 20px; 
-  text-align: center; 
-  font-size: 18px; 
-  color: #333; 
-  background-color: #f9f9f9; 
-  border: 2px solid #0073e6; 
-  border-radius: 10px; 
-  margin: 20px auto; 
-  max-width: 95%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-">
-  <div class="spinner" style="
-    border: 4px solid #f3f3f3; 
-    border-top: 4px solid #0073e6; 
-    border-radius: 50%; 
-    width: 50px; 
-    height: 50px; 
-    animation: spin 1s linear infinite;
-  "></div>
-  <p style="
-    margin-top: 15px; 
-    color: #0073e6; 
-    font-weight: bold;
-  ">⏳Carregando dados⏳...</p>
-</div>
-
-<input type="text" 
-  id="search-query" 
-  placeholder="Digite Razão Social" 
-  onkeyup="searchRazaoSocial()" 
-  style="
-    width: 90%; 
-    padding: 15px 20px; 
-    font-size: 18px; 
-    border: 2px solid #0073e6; 
-    border-radius: 10px; 
-    margin: 15px auto; 
-    display: block; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  ">
-
-
-
-<table id="results-table">
-  <thead>
-    <tr>
-      <th>Razão Social 🏛</th>
-      <th>Renúncias Fiscais (R$) 💵</th>
-      <th>Quantas Cestas Básicas (Setembro 2024 São Paulo Capital R$ 792,47) 🛒</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Dados inseridos aqui dinamicamente -->
-  </tbody>
-</table>
-
-<style>
-  /* Spinner Animation */
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  /* Responsive Table */
-  #results-table {
-    max-width: 100%;
-    overflow-x: auto;
-  }
-
-  th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-
-  th {
-    white-space: nowrap;
-  }
-</style>
-
-
-<style>
-  /* Responsividade e ajuste para dispositivos móveis */
-  @media (max-width: 768px) {
-    .text-section {
-      padding: 15px;
-      margin: 10px 0;
-    }
-    h1 {
-      font-size: 20px;
-    }
-    p, li {
-      font-size: 14px;
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 10px;
-    }
-    table {
-      font-size: 14px;
-    }
-    table th, table td {
-      padding: 8px;
-    }
-  }
-
-  /* Ajuste para dispositivos muito pequenos */
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 18px;
-    }
-    .text-section {
-      padding: 10px;
-    }
-    input {
-      padding: 10px;
-    }
-    table {
-      font-size: 12px;
-    }
-  }
-</style>
 
   <script>
     let data = []; // Dados do CSV
@@ -369,8 +317,8 @@ function formatCurrency(value) {
     }
 
     function showLoading(isLoading) {
-      const loadingText = document.getElementById("loading");
-      loadingText.style.display = isLoading ? "block" : "none";
+      const loadingDiv = document.querySelector('.loading'); 
+      loadingDiv.style.display = isLoading ? "flex" : "none";
     }
   </script>
 </body>
