@@ -310,12 +310,14 @@ function formatCurrency(value) {
 
     // Filtrar dados com base na pesquisa
     function searchRazaoSocial() {
+      if (event.key === 'Enter') {
       function searchRazaoSocial() {
       const query = document.getElementById("search-query").value.toLowerCase();
       const filteredData = data.filter(row =>
         row["razao_social"] && row["razao_social"].toLowerCase().includes(query)
       );
       displayData(filteredData);
+      }
       }
     }
 
