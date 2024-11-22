@@ -95,34 +95,37 @@
 
   <div class="text-section" style="
   background-color: #f0f8ff; 
-  padding: 15px; 
-  margin: 15px 0; 
+  padding: 10px; 
   border-radius: 8px; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  overflow-y: auto; 
-  max-height: 250px;">
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  z-index: 1000; 
+  text-align: center; 
+  font-family: Arial, sans-serif; 
+  overflow-y: auto;
+">
   <h1 style="
-    font-size: 20px; 
+    font-size: 18px; 
     color: #003366; 
-    text-align: center; 
-    font-family: Arial, sans-serif; 
-    margin-bottom: 15px;">
-    Pesquise Renúncia Fiscal 2024 de Empresas por Razão Social
+    margin-bottom: 10px;">
+    Renúncia Fiscal 2024 - Pesquise por Razão Social
   </h1>
   <p style="
-    font-size: 14px; 
+    font-size: 13px; 
     color: #333; 
-    line-height: 1.4; 
-    margin-bottom: 8px;">
-    Use o campo de pesquisa para encontrar informações sobre a razão social das empresas que podem estar envolvidas em <strong>renúncias fiscais</strong>. A razão social é o nome oficial de uma empresa, registrado em instituições como a Receita Federal.
-  </p>
-  <p style="
-    font-size: 14px; 
-    color: #333; 
+    margin-bottom: 5px; 
     line-height: 1.4;">
-    Essas informações podem ajudar você a verificar se uma empresa se beneficia de pagar menos impostos enquanto afeta trabalhadores ou consumidores de outras formas. Basta digitar a razão social da empresa no campo de pesquisa.
+    Encontre empresas envolvidas em <strong>renúncias fiscais</strong>. 
+    Digite a razão social no campo de pesquisa para visualizar os dados.
   </p>
 </div>
+
+<!-- Espaço reservado para evitar que o conteúdo abaixo seja sobreposto -->
+<div style="margin-top: 80px;"></div>
+
 
 
 
@@ -193,6 +196,19 @@
 
 
 
+<table id="results-table">
+  <thead>
+    <tr>
+      <th>Razão Social 🏛</th>
+      <th>Renúncias Fiscais (R$) 💵</th>
+      <th>Quantas Cestas Básicas (Setembro 2024 São Paulo Capital R$ 792,47) 🛒</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Dados inseridos aqui dinamicamente -->
+  </tbody>
+</table>
+
 <style>
   /* Spinner Animation */
   @keyframes spin {
@@ -208,7 +224,6 @@
   #results-table {
     max-width: 100%;
     overflow-x: auto;
-    display: block;
   }
 
   th, td {
@@ -222,19 +237,6 @@
   }
 </style>
 
-
-<table id="results-table">
-  <thead>
-    <tr>
-      <th>Razão Social 🏛</th>
-      <th>Renúncias Fiscais (R$) 💵</th>
-      <th>Quantas Cestas Básicas (Setembro 2024 São Paulo Capital R$ 792,47) 🛒</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Dados inseridos aqui dinamicamente -->
-  </tbody>
-</table>
 
 <style>
   /* Responsividade e ajuste para dispositivos móveis */
