@@ -210,7 +210,7 @@ input[type="text"]:focus {
       </div>
   
       <!-- Campo de Pesquisa -->
-      <input type="text" id="search-query" placeholder="Digite Razão Social" onkeyup="searchRazaoSocial()">
+      <input type="text" id="search-query" placeholder="Digite Razão Social" onkeydown="searchRazaoSocial()">
   
       <!-- Tabela de Resultados -->
       <table id="results-table">
@@ -310,11 +310,13 @@ function formatCurrency(value) {
 
     // Filtrar dados com base na pesquisa
     function searchRazaoSocial() {
+      function searchRazaoSocial() {
       const query = document.getElementById("search-query").value.toLowerCase();
       const filteredData = data.filter(row =>
         row["razao_social"] && row["razao_social"].toLowerCase().includes(query)
       );
       displayData(filteredData);
+      }
     }
 
     function showLoading(isLoading) {
