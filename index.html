@@ -311,6 +311,7 @@ function formatCurrency(value) {
     // Filtrar dados com base na pesquisa
     function searchRazaoSocial(event) {
       if (event.key === 'Enter') {
+        event.preventDefault()
       const query = document.getElementById("search-query").value.toLowerCase();
       const filteredData = data.filter(row =>
         row["razao_social"] && row["razao_social"].toLowerCase().includes(query)
