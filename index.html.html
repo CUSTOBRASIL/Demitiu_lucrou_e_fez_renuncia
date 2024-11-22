@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pesquisa de Dataset por Razão Social</title>
+  <title>Pesquisa de Renuncia Fiscal 2024 por Razão Social</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   <style>
     body {
@@ -114,7 +114,7 @@
     color: #333; 
     line-height: 1.4; 
     margin-bottom: 8px;">
-    Use o campo abaixo para encontrar informações sobre a razão social das empresas que podem estar envolvidas em <strong>renúncias fiscais</strong>. A razão social é o nome oficial de uma empresa, registrado em instituições como a Receita Federal.
+    Use o campo de pesquisa para encontrar informações sobre a razão social das empresas que podem estar envolvidas em <strong>renúncias fiscais</strong>. A razão social é o nome oficial de uma empresa, registrado em instituições como a Receita Federal.
   </p>
   <p style="
     font-size: 14px; 
@@ -125,33 +125,7 @@
 </div>
 
 
-<div class="text-section" style="
-  background-color: #f0f8ff; 
-  padding: 20px; 
-  border: 2px solid #0073e6; 
-  border-radius: 10px; 
-  color: #333; 
-  font-size: 18px; 
-  line-height: 1.6; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-">
-  <p>
-    <strong style="color: #0073e6;">O que é Razão Social?</strong> 
-    A razão social é o nome oficial de uma empresa, registrado em documentos legais e utilizado em contratos, notas fiscais e registros na Receita Federal. É diferente do nome fantasia, que é o nome pelo qual a empresa é conhecida pelo público.
-  </p>
-  <p>
-    <strong style="color: #ff4500;">Como encontrar a Razão Social:</strong>
-    Você pode encontrar a razão social de uma empresa nos seguintes locais:
-    <ul>
-      <li>🔍 <strong>Site da Receita Federal:</strong> Use o <a href="https://receitafederal.gov.br" target="_blank" style="color: #0073e6; text-decoration: underline;">site oficial</a> e busque pelo CNPJ.</li>
-      <li>📜 <strong>Juntas Comerciais:</strong> Consulte os registros empresariais do estado onde a empresa está localizada.</li>
-      <li>💼 <strong>Documentos Fiscais:</strong> Verifique notas fiscais, contratos ou outros documentos emitidos pela empresa.</li>
-    </ul>
-  </p>
-  <p>
-    Caso tenha dificuldades em localizar, tente procurar pelo nome fantasia ou CNPJ da empresa. 
-  </p>
-</div>
+
 
 <div class="text-section" style="
   background-color: #ffe6e6; 
@@ -171,30 +145,83 @@
     enquanto deixam os trabalhadores desprotegidos do seus direitos.
   </p>
 </div>
-<div id="loading">
-  <div class="spinner"></div>
-  <p>⏳Carregando dados⏳ ...</p>
+<div id="loading" style="
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  padding: 20px; 
+  text-align: center; 
+  font-size: 18px; 
+  color: #333; 
+  background-color: #f9f9f9; 
+  border: 2px solid #0073e6; 
+  border-radius: 10px; 
+  margin: 20px auto; 
+  max-width: 95%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+">
+  <div class="spinner" style="
+    border: 4px solid #f3f3f3; 
+    border-top: 4px solid #0073e6; 
+    border-radius: 50%; 
+    width: 50px; 
+    height: 50px; 
+    animation: spin 1s linear infinite;
+  "></div>
+  <p style="
+    margin-top: 15px; 
+    color: #0073e6; 
+    font-weight: bold;
+  ">⏳Carregando dados⏳...</p>
 </div>
+
 <input type="text" 
   id="search-query" 
   placeholder="Digite Razão Social" 
   onkeyup="searchRazaoSocial()" 
   style="
-    width: 100%; 
-    max-width: 700px; 
-    padding: 20px 30px; 
-    font-size: 20px; 
-    border: 3px solid #0073e6; 
-    border-radius: 12px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
-    margin: 20px auto; 
-    display: block;
+    width: 90%; 
+    padding: 15px 20px; 
+    font-size: 18px; 
+    border: 2px solid #0073e6; 
+    border-radius: 10px; 
+    margin: 15px auto; 
+    display: block; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   ">
 
-<div id="loading">
-  <div class="spinner"></div>
-  <p>⏳Carregando dados⏳ ...</p>
-</div>
+
+
+<style>
+  /* Spinner Animation */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Responsive Table */
+  #results-table {
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    white-space: nowrap;
+  }
+</style>
+
 
 <table id="results-table">
   <thead>
