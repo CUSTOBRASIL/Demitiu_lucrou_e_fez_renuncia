@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesquisa de Dataset por Razão Social</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      color: #333;
+    }
+
+    #loading {
+      display: none;
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    input {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f9c74f;
+      text-align: center;
+    }
+
+    #loading {
+      display: none;
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .text-section {
+      background-color: #e0e0e0;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .renuncia-fiscal {
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      background-color: #ffe6e6;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 15px;
+      }
+
+      table {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="text-section" style="
+  background-color: #f0f8ff; 
+  padding: 20px; 
+  margin: 20px 0; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  overflow-y: auto; 
+  max-height: 300px;">
+  <h1 style="
+    font-size: 24px; 
+    color: #003366; 
+    text-align: center; 
+    font-family: Arial, sans-serif; 
+    margin-bottom: 20px;">
+    Pesquise Renúncia Fiscal 2024 de Empresas por Razão Social
+  </h1>
+  <p style="
+    font-size: 16px; 
+    color: #333; 
+    line-height: 1.5; 
+    margin-bottom: 10px;">
+    Use o campo abaixo para encontrar informações sobre a razão social das empresas que podem estar envolvidas em <strong>renúncias fiscais</strong>. A razão social é o nome oficial de uma empresa, registrado em instituições como a Receita Federal.
+  </p>
+  <p style="
+    font-size: 16px; 
+    color: #333; 
+    line-height: 1.5;">
+    Essas informações podem ajudar você a verificar se uma empresa se beneficia de pagar menos impostos enquanto afeta trabalhadores ou consumidores de outras formas. Basta digitar a razão social da empresa no campo de pesquisa para obter os dados relacionados.
+  </p>
+</div>
+
+
+
+  <div class="text-section" style="
+  background-color: #f0f8ff; 
+  padding: 20px; 
+  border: 2px solid #0073e6; 
+  border-radius: 10px; 
+  color: #333; 
+  font-size: 18px; 
+  line-height: 1.6; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+">
+  <p>
+    <strong style="color: #0073e6;">O que é Razão Social?</strong> 
+    A razão social é o nome oficial de uma empresa, registrado em documentos legais e utilizado em contratos, notas fiscais e registros na Receita Federal. É diferente do nome fantasia, que é o nome pelo qual a empresa é conhecida pelo público.
+  </p>
+  <p>
+    <strong style="color: #ff4500;">Como encontrar a Razão Social:</strong>
+    Você pode encontrar a razão social de uma empresa nos seguintes locais:
+    <ul>
+      <li>🔍 <strong>Site da Receita Federal:</strong> Use o <a href="https://receitafederal.gov.br" target="_blank" style="color: #0073e6; text-decoration: underline;">site oficial</a> e busque pelo CNPJ.</li>
+      <li>📜 <strong>Juntas Comerciais:</strong> Consulte os registros empresariais do estado onde a empresa está localizada.</li>
+      <li>💼 <strong>Documentos Fiscais:</strong> Verifique notas fiscais, contratos ou outros documentos emitidos pela empresa.</li>
+    </ul>
+  </p>
+  <p>
+    Caso tenha dificuldades em localizar, tente procurar pelo nome fantasia ou CNPJ da empresa. 
+  </p>
+</div>
+  <div class="text-section" style="
+  background-color: #ffe6e6; 
+  padding: 20px; 
+  border: 2px solid #ff4d4d; 
+  border-radius: 10px; 
+  color: #333; 
+  font-size: 18px; 
+  line-height: 1.6; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+">
+  <p>
+    <strong style="color: #ff0000;">Atenção, trabalhador:</strong> 
+    Apesar de discursos que dizem proteger seus direitos, muitas políticas econômicas, 
+    sejam elas <span style="color: #ff7f50;">neoliberais</span> ou <span style="color: #1e90ff;">de extrema direita</span>, 
+    de Bolsonaro e Haddad podem impactar negativamente ao favorecer cortes e renúncias fiscais que beneficiam empresas, 
+    enquanto deixam os trabalhadores desprotegidos do seus direitos.
+  </p>
+</div>
+
+  <input type="text" id="search-query" placeholder="Digite Razão Social" onkeyup="searchRazaoSocial()">
+  <div id="loading">
+    <div class="spinner"></div>
+    <p>Carregando dados...</p>
+  </div>
+  <table id="results-table">
+    <thead>
+      <tr>
+        <th>Razão Social 🏛</th>
+        <th>Renúncias Fiscais (R$) 💵</th>
+        <th>Quantas Cestas Basicas (Setembro 2024 Sao Paulo Capital R$ 792,47) 🛒</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Dados inseridos aqui dinamicamente -->
+    </tbody>
+  </table>
+
+  <script>
+    let data = []; // Dados do CSV
+
+    // Carregar dados do CSV ao carregar a página
+    window.onload = function () {
+      showLoading(true);
+      fetch('imposto.csv')
+        .then(response => response.text())
+        .then(csvText => {
+          Papa.parse(csvText, {
+            header: true, // Utilizar cabeçalhos do CSV
+            skipEmptyLines: true, // Ignorar linhas vazias
+            complete: function (results) {
+              if (results.data) {
+                data = results.data; // Armazenar os dados
+                displayData(data); // Mostrar todos os dados na tabela
+                showLoading(false);
+              } else {
+                console.error("Erro: Nenhum dado encontrado no CSV.");
+                showLoading(false);
+              }
+            },
+          });
+        })
+        .catch(error => console.error("Erro ao carregar o CSV:", error));
+    };
+
+    const cestaBasicaValor = 792.47; // Atualize para o valor atual da cesta básica
+
+
+// Mostrar dados na tabela (com cestas básicas)
+function displayData(data) {
+  const tableBody = document.getElementById("results-table").getElementsByTagName("tbody")[0];
+  tableBody.innerHTML = ""; // Limpar tabela
+
+  if (data.length === 0) {
+    const tr = document.createElement("tr");
+    const tdNoData = document.createElement("td");
+    tdNoData.textContent = "Nenhum dado encontrado.";
+    tdNoData.colSpan = 3; // Abranger as três colunas
+    tdNoData.style.textAlign = "center";
+    tr.appendChild(tdNoData);
+    tableBody.appendChild(tr);
+    return;
+  }
+
+  data.forEach(row => {
+    const tr = document.createElement("tr");
+
+    // Coluna de Razão Social
+    const tdRazaoSocial = document.createElement("td");
+    tdRazaoSocial.textContent = row["razao_social"] || "N/A";
+
+    // Coluna de Renúncia Fiscal
+    const renunciaFiscal = parseFloat((row["Unnamed: 1"] || "0").replace(",", "."));
+    const tdRenunciasFiscais = document.createElement("td");
+    tdRenunciasFiscais.textContent = formatCurrency(renunciaFiscal);
+    tdRenunciasFiscais.classList.add("renuncia-fiscal");
+
+    // Coluna de Cestas Básicas
+    const tdCestasBasicas = document.createElement("td");
+    const quantidadeCestas = Math.floor(renunciaFiscal / cestaBasicaValor);
+    tdCestasBasicas.textContent = `${quantidadeCestas}  🛒`;
+
+    tr.appendChild(tdRazaoSocial);
+    tr.appendChild(tdRenunciasFiscais);
+    tr.appendChild(tdCestasBasicas);
+    tableBody.appendChild(tr);
+  });
+}
+
+// Formatar valores como moeda (R$)
+function formatCurrency(value) {
+  const number = parseFloat(value);
+  return isNaN(number) ? "R$ 0,00" : `R$ ${number.toFixed(2).replace(".", ",")}`;
+}
+
+
+    // Filtrar dados com base na pesquisa
+    function searchRazaoSocial() {
+      const query = document.getElementById("search-query").value.toLowerCase();
+      const filteredData = data.filter(row =>
+        row["razao_social"] && row["razao_social"].toLowerCase().includes(query)
+      );
+      displayData(filteredData);
+    }
+
+    function showLoading(isLoading) {
+      const loadingText = document.getElementById("loading");
+      loadingText.style.display = isLoading ? "block" : "none";
+    }
+  </script>
+</body>
+</html>
