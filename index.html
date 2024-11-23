@@ -295,9 +295,9 @@ function displayData(data) {
 }
 
 // Formatar valores como moeda (R$)
-function formatCurrency(value) {
-  const number = parseFloat(value);
-  return isNaN(number) ? "R$ 0,00" : `R$ ${number.toFixed(2).replace(".", ",")}`;
+function formatCurrency(value){
+  var numero = parseFloat(value).toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' });
+  return numero;
 }
 
 
