@@ -325,6 +325,9 @@ input[type="text"]:focus {
     let data = []; // Dados do CSV
 
     // Carregar dados do CSV ao carregar a página
+    let data = []; // Dados do CSV
+
+    // Carregar dados do CSV ao carregar a página
     window.onload = function () {
       showLoading(true);
       fetch('imposto.csv')
@@ -349,8 +352,6 @@ input[type="text"]:focus {
     };
 
     const cestaBasicaValor = 600.00; // Atualize para o valor atual da cesta básica
-
-
 // Mostrar dados na tabela (com cestas básicas)
 function displayData(data) {
   const tableBody = document.getElementById("results-table").getElementsByTagName("tbody")[0];
